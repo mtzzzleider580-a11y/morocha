@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#150f3d" />
+    <title>Para ti ♡</title>
+
+    <!-- Tipografías: Great Vibes (caligráfica) + Cormorant Garamond (serif clásica) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- ==========================================================
+         DEFINICIONES SVG REUTILIZABLES (tulipanes y ramo)
+         No se ven por sí solas: se "invocan" con <use href="#...">
+         ========================================================== -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <!-- Degradados de pétalos: frontal (-) y laterales (-s, más oscuros) -->
+        <linearGradient id="g-lilac" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#d6c2ef" /><stop offset="1" stop-color="#a284cb" />
+        </linearGradient>
+        <linearGradient id="g-lilac-s" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#b99edd" /><stop offset="1" stop-color="#8466ad" />
+        </linearGradient>
+        <linearGradient id="g-white" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffffff" /><stop offset="1" stop-color="#ecdff2" />
+        </linearGradient>
+        <linearGradient id="g-white-s" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#f4ecf7" /><stop offset="1" stop-color="#d8c8e2" />
+        </linearGradient>
+        <linearGradient id="g-wine" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#9b2a4b" /><stop offset="1" stop-color="#5f0f26" />
+        </linearGradient>
+        <linearGradient id="g-wine-s" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#7c1c3a" /><stop offset="1" stop-color="#420a1b" />
+        </linearGradient>
+        <linearGradient id="g-leaf" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0" stop-color="#58775a" /><stop offset="1" stop-color="#8fab88" />
+        </linearGradient>
+
+        <!-- Tallo + hojas (compartido por todos los tulipanes). Lienzo: 100 x 200 -->
+        <g id="stem">
+          <path d="M50 78C47 112 54 152 50 200" fill="none" stroke="#6b8a68" stroke-width="3.6" stroke-linecap="round" />
+          <path d="M50 200C26 176 18 142 26 108 44 128 54 162 50 200Z" fill="url(#g-leaf)" />
+          <path d="M50 200C74 182 84 154 78 124 60 140 50 168 50 200Z" fill="url(#g-leaf)" opacity=".92" />
+        </g>
+
+        <!-- Tulipán lila -->
+        <g id="tulip-lilac">
+          <use href="#stem" />
+          <path d="M50 76C30 74 21 51 25 22 36 30 46 43 50 76Z" fill="url(#g-lilac-s)" />
+          <path d="M50 76C70 74 79 51 75 22 64 30 54 43 50 76Z" fill="url(#g-lilac-s)" />
+          <path d="M50 80C33 67 33 37 50 13 67 37 67 67 50 80Z" fill="url(#g-lilac)" />
+          <path d="M50 24C44 40 44 58 50 72" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="1.4" stroke-linecap="round" />
+        </g>
+
+        <!-- Tulipán blanco (con fino borde vino tinto) -->
+        <g id="tulip-white">
+          <use href="#stem" />
+          <path d="M50 76C30 74 21 51 25 22 36 30 46 43 50 76Z" fill="url(#g-white-s)" stroke="#590d22" stroke-opacity=".28" stroke-width=".8" />
+          <path d="M50 76C70 74 79 51 75 22 64 30 54 43 50 76Z" fill="url(#g-white-s)" stroke="#590d22" stroke-opacity=".28" stroke-width=".8" />
+          <path d="M50 80C33 67 33 37 50 13 67 37 67 67 50 80Z" fill="url(#g-white)" stroke="#590d22" stroke-opacity=".28" stroke-width=".8" />
+          <path d="M50 24C44 40 44 58 50 72" fill="none" stroke="#d9c8e4" stroke-opacity=".7" stroke-width="1.4" stroke-linecap="round" />
+        </g>
+
+        <!-- Tulipán vino tinto -->
+        <g id="tulip-wine">
+          <use href="#stem" />
+          <path d="M50 76C30 74 21 51 25 22 36 30 46 43 50 76Z" fill="url(#g-wine-s)" />
+          <path d="M50 76C70 74 79 51 75 22 64 30 54 43 50 76Z" fill="url(#g-wine-s)" />
+          <path d="M50 80C33 67 33 37 50 13 67 37 67 67 50 80Z" fill="url(#g-wine)" />
+          <path d="M50 24C44 40 44 58 50 72" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="1.4" stroke-linecap="round" />
+        </g>
+
+        <!-- Ramo: 5 tulipanes que parten de un mismo punto + lazo vino tinto. Lienzo: 200 x 200 -->
+        <g id="bouquet">
+          <g transform="translate(100 198) rotate(-46) scale(.5) translate(-50 -200)"><use href="#tulip-white" /></g>
+          <g transform="translate(100 198) rotate(44) scale(.5) translate(-50 -200)"><use href="#tulip-lilac" /></g>
+          <g transform="translate(100 198) rotate(-24) scale(.66) translate(-50 -200)"><use href="#tulip-lilac" /></g>
+          <g transform="translate(100 198) rotate(24) scale(.64) translate(-50 -200)"><use href="#tulip-wine" /></g>
+          <g transform="translate(100 198) rotate(0) scale(.78) translate(-50 -200)"><use href="#tulip-white" /></g>
+          <!-- lazo -->
+          <path d="M98 177l-5 19 7-5zM102 177l5 19-7-5z" fill="#590d22" />
+          <path d="M100 174c-9-11-20-9-17 0 3 7 14 6 17 0zM100 174c9-11 20-9 17 0-3 7-14 6-17 0z" fill="#590d22" />
+          <circle cx="100" cy="174" r="3.4" fill="#7a1a37" />
+        </g>
+      </defs>
+    </svg>
+
+    <!-- ==========================================================
+         FONDO: cielo, estrellas, luna, colinas y flores
+         ========================================================== -->
+    <div class="sky" aria-hidden="true"></div>
+    <div class="stars" id="stars" aria-hidden="true"></div>
+    <div class="moon" aria-hidden="true"></div>
+
+    <svg class="hills" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 90C180 40 340 40 520 80S880 130 1080 70 1340 40 1440 70V200H0Z" fill="#2a1658" opacity=".85" />
+      <path d="M0 140C220 100 420 110 640 140S1040 170 1240 130 1400 120 1440 130V200H0Z" fill="#190c38" />
+    </svg>
+
+    <div class="garden garden--left" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><use href="#bouquet" /></svg>
+    </div>
+    <div class="garden garden--right" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><use href="#bouquet" /></svg>
+    </div>
+
+    <!-- ==========================================================
+         ESCENA: el sobre
+         ========================================================== -->
+    <main class="scene">
+      <h1 class="intro">Una carta para ti</h1>
+
+      <div class="envelope-wrap">
+        <div class="envelope" id="envelope">
+          <!-- Fondo interior del sobre -->
+          <div class="env-back"></div>
+
+          <!-- Hoja que asoma al abrir -->
+          <div class="sheet"></div>
+
+          <!-- Bolsillo frontal (triángulos laterales e inferior) -->
+          <div class="pocket-wrap">
+            <div class="pocket">
+              <svg viewBox="0 0 100 66" preserveAspectRatio="none" aria-hidden="true">
+                <polygon points="0,0 50,36.3 0,66" fill="rgba(120,85,50,.07)" />
+                <polygon points="100,0 50,36.3 100,66" fill="rgba(120,85,50,.07)" />
+                <polygon points="0,66 50,36.3 100,66" fill="rgba(255,255,255,.22)" />
+                <path d="M0 66L50 36.3 100 66" fill="none" stroke="rgba(120,85,50,.35)" stroke-width="1" vector-effect="non-scaling-stroke" />
+                <path d="M0 0L50 36.3 100 0" fill="none" stroke="rgba(120,85,50,.25)" stroke-width="1" vector-effect="non-scaling-stroke" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Sombra bajo la solapa + solapa 3D -->
+          <div class="flap-shade"><div></div></div>
+          <div class="flap">
+            <div class="flap-face flap-front"></div>
+            <div class="flap-face flap-back"></div>
+          </div>
+
+          <!-- Sello de cera (vino tinto) -->
+          <button class="seal" id="seal" type="button" aria-label="Abrir la carta">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <defs>
+                <radialGradient id="wax" cx="38%" cy="32%" r="75%">
+                  <stop offset="0" stop-color="#9a2a4a" />
+                  <stop offset=".45" stop-color="#6e1330" />
+                  <stop offset="1" stop-color="#3f0a1a" />
+                </radialGradient>
+                <!-- Borde irregular, como cera derretida -->
+                <filter id="waxEdge" x="-10%" y="-10%" width="120%" height="120%">
+                  <feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4" result="t" />
+                  <feDisplacementMap in="SourceGraphic" in2="t" scale="9" />
+                </filter>
+                <path id="sealHeart" d="M50 67C36 56 33 46 39 41 44 37 49 40 50 44 51 40 56 37 61 41 67 46 64 56 50 67Z" />
+              </defs>
+              <circle cx="50" cy="50" r="41" fill="url(#wax)" filter="url(#waxEdge)" />
+              <ellipse cx="38" cy="30" rx="15" ry="7" fill="#fff" opacity=".12" transform="rotate(-30 38 30)" />
+              <!-- Relieve: aro interior -->
+              <circle cx="50" cy="50" r="30" fill="none" stroke="#3a0817" stroke-opacity=".55" stroke-width="2.2" />
+              <circle cx="50" cy="50" r="30" fill="none" stroke="#c4607f" stroke-opacity=".35" stroke-width="1" transform="translate(-.9 -.9)" />
+              <!-- Relieve: corazón -->
+              <use href="#sealHeart" fill="#3a0817" opacity=".6" transform="translate(1 1.2)" />
+              <use href="#sealHeart" fill="#d9809b" opacity=".4" transform="translate(-.8 -.8)" />
+              <use href="#sealHeart" fill="#6b1230" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <p class="hint">Toca el sello para abrir</p>
+    </main>
+
+    <!-- ==========================================================
+         LA CARTA (aparece después de abrir el sobre)
+         ========================================================== -->
+    <section class="reader" id="reader" aria-hidden="true" inert>
+      <article class="letter" role="dialog" aria-label="Carta">
+        <button class="letter-close" id="closeBtn" type="button" aria-label="Guardar la carta">×</button>
+
+        <header class="letter-head">
+          <!-- AQUÍ VA LA FECHA (formato clásico) -->
+          <p class="letter-date">17 de noviembre de 2026</p>
+        </header>
+
+        <div class="letter-scroll" id="letterScroll" tabindex="0">
+          <div class="letter-body">
+            <!-- ================= AQUÍ VA MI CARTA ================= -->
+            <!-- Cambia el saludo, los párrafos y la firma por tu texto real.
+                 Cada párrafo va dentro de su propio <p>…</p>. -->
+            <h2 class="letter-greeting">Desde que llegaste...,</h2>
+
+            <p>
+             Si me preguntaran cuántas veces al día pienso en ti, 
+             probablemente no sabría qué responder.
+             Podría decir que por las mañanas, cuando
+             comienza el día; por las tardes, cuando alguna canción
+             me recuerda a ti, o por las noches, cuando los pensamientos parecen tener más libertad para recorrer aquello que durante el día dejamos pendiente. Pero creo que ninguna de esas respuestas sería suficiente. Porque no se trata de cuántas veces apareces en mi mente, sino de que, de alguna manera, nunca terminas de irte.
+            </p>
+
+            <p>
+              Te encuentro en pequeñas cosas, en situaciones que quizás para 
+              cualquier otra persona pasarían desapercibidas. En una canción 
+              cuya letra parece guardar algo de ti, en una palabra que me recuerda 
+              alguna conversación nuestra o en esos momentos en los que me descubro sonriendo sin una razón aparente. Y lo curioso es que no necesito estar hablando contigo para recordarte. A veces basta con que el mundo se quede en silencio unos segundos para que aparezcas entre mis pensamientos. No sé exactamente en qué momento sucedió, ni cómo conseguiste hacerte un espacio entre tantas cosas que ocupan mi cabeza. Simplemente ocurrió. Y ahora hay una parte de mis días que inevitablemente lleva un poquito de ti.
+            </p>
+
+            <p>
+              Quizás eso sea lo bonito de comenzar a sentir algo
+              por alguien: no darte cuenta del instante exacto en 
+              que sucede, sino descubrirlo después, cuando ya 
+              encuentras motivos para pensar en esa persona incluso
+              en los momentos más inesperados. Y si alguna vez 
+              te preguntas qué lugar ocupas en mis pensamientos, 
+              quisiera que supieras que no eres una visita que aparece
+              de vez en cuando. Eres ese pensamiento al que siempre
+              termino regresando, incluso cuando no me he dado cuenta 
+              de que me había ido. Porque hay personas que llegan a 
+              nuestra vida y dejan recuerdos; pero hay otras que llegan y,
+              sin hacer demasiado ruido, se convierten en una parte
+              de nuestros días. Y qué bonita casualidad que una de ellas
+              seas tú. 
+            </p>
+
+            <p class="letter-sign">Att: leider <br />K+L</p>
+            <!-- ================= FIN DE LA CARTA ================= -->
+          </div>
+        </div>
+
+        <footer class="letter-foot">
+          <svg class="bouquet bouquet--left" viewBox="0 0 200 200" aria-hidden="true"><use href="#bouquet" /></svg>
+          <span class="scroll-hint" id="scrollHint">desliza ⌄</span>
+          <svg class="bouquet bouquet--right" viewBox="0 0 200 200" aria-hidden="true"><use href="#bouquet" /></svg>
+        </footer>
+      </article>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
